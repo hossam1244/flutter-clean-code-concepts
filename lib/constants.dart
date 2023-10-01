@@ -1,0 +1,11 @@
+const String variables = 'Variables';
+const String functions = 'Functions';
+const String objectsAndDataStructures = 'Objects and Data Structures';
+const String classes = 'Classes';
+const String solid = 'SOLID';
+const String testing = 'Testing';
+const String concurrency = 'Concurrency';
+const String errorHandling = 'Error Handling';
+const String formatting = 'Formatting';
+const String comments = 'Comments';
+const String translation = 'Translation';

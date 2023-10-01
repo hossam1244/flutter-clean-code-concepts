@@ -1,5 +1,8 @@
 import 'package:animation_list/animation_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_code_concepts/constants.dart';
+import 'package:flutter_clean_code_concepts/variables/variables.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,65 +14,70 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> data = [
     {
-      'title': 'Variables',
+      'title': variables,
       'backgroundColor': Colors.grey,
     },
     {
-      'title': 'Functions',
+      'title': functions,
       'backgroundColor': Colors.red,
     },
     {
-      'title': 'Objects and Data Structures',
+      'title': objectsAndDataStructures,
       'backgroundColor': Colors.yellow,
     },
     {
-      'title': 'Classes',
+      'title': classes,
       'backgroundColor': Colors.blue,
     },
     {
-      'title': 'SOLID',
+      'title': solid,
       'backgroundColor': Colors.green,
     },
     {
-      'title': 'Testing',
+      'title': testing,
       'backgroundColor': Colors.orange,
     },
     {
-      'title': 'Concurrency',
+      'title': concurrency,
       'backgroundColor': Colors.brown,
     },
     {
-      'title': 'Error Handling',
+      'title': errorHandling,
       'backgroundColor': Colors.purple,
     },
     {
-      'title': 'Formatting',
+      'title': formatting,
       'backgroundColor': Colors.tealAccent,
     },
     {
-      'title': 'Comments',
+      'title': comments,
       'backgroundColor': Colors.green,
     },
     {
-      'title': 'Translation',
+      'title': translation,
       'backgroundColor': Colors.purple,
     },
   ];
 
   Widget _buildTile(String? title, Color? backgroundColor) {
-    return Container(
-      height: 100,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-        color: backgroundColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Text(
-          title ?? "",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+    return InkWell(
+      onTap: () {
+        _navigateTo(title ?? '');
+      },
+      child: Container(
+        height: 100,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(25)),
+          color: backgroundColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Text(
+            title ?? "",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
@@ -90,5 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
             }).toList()),
       ),
     );
+  }
+
+  _navigateTo(String route) {
+    print('route: $route');
+    context.go('/$route');
+   // Navigator.pushNamed(context, '/$route');
   }
 }
