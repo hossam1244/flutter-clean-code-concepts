@@ -8,12 +8,11 @@ import 'package:flutter_clean_code_concepts/objects_and_data_structures/objects_
 import 'package:flutter_clean_code_concepts/solid_principles/solid.dart';
 import 'package:flutter_clean_code_concepts/testing/Testing.dart';
 import 'package:flutter_clean_code_concepts/translation/Translation.dart';
-import 'package:flutter_clean_code_concepts/variables/variables.dart';
 import 'package:go_router/go_router.dart';
 
 import 'classes/classes.dart';
 import 'comments/comments.dart';
-import 'constants.dart';
+import 'core/constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,19 +20,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      title: 'Flutter-Clean-Code',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-    );
-  }
 
   // GoRouter configuration
   final _router = GoRouter(
@@ -45,14 +31,6 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/$concurrency',
         builder: (context, state) => Concurrency(),
-      ),
-      GoRoute(
-        path: '/$functions',
-        builder: (context, state) => Functions(),
-      ),
-      GoRoute(
-        path: '/$variables',
-        builder: (context, state) => Variables(),
       ),
       GoRoute(
         path: '/$solid',
@@ -82,10 +60,18 @@ class MyApp extends StatelessWidget {
         path: '/$comments',
         builder: (context, state) => Comments(),
       ),
-      GoRoute(
-        path: '/$classes',
-        builder: (context, state) => Classes(),
-      ),
     ],
   );
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      routerConfig: _router,
+      title: 'Flutter-Clean-Code',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+    );
+  }
 }

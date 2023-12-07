@@ -1,8 +1,8 @@
 import 'package:animation_list/animation_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_code_concepts/constants.dart';
-import 'package:flutter_clean_code_concepts/variables/variables.dart';
 import 'package:go_router/go_router.dart';
+
+import 'core/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,50 +59,50 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
-  Widget _buildTile(String? title, Color? backgroundColor) {
-    return InkWell(
-      onTap: () {
-        _navigateTo(title ?? '');
-      },
-      child: Container(
-        height: 100,
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: backgroundColor,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Text(
-            title ?? "",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    );
+  _navigateToSpecificScreen(String route) {
+    context.go('/$route');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Clean-Code Concepts'),
+        title: const Text('Clean-Code Concepts'),
       ),
       body: Center(
         child: AnimationList(
             duration: 1500,
             reBounceDepth: 30,
             children: data.map((item) {
-              return _buildTile(item['title'], item['backgroundColor']);
+              String? title = item['title'];
+              Color? backgroundColor = item['backgroundColor'];
+              return _customBuildTile(title, backgroundColor);
             }).toList()),
       ),
     );
   }
 
-  _navigateTo(String route) {
-    print('route: $route');
-    context.go('/$route');
-   // Navigator.pushNamed(context, '/$route');
+  Widget _customBuildTile(String? title, Color? backgroundColor) {
+    return InkWell(
+      onTap: () {
+        _navigateToSpecificScreen(title ?? '');
+      },
+      child: Container(
+        height: 100,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(25)),
+          color: backgroundColor,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Text(
+            title ?? "",
+            style: const TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
   }
 }
